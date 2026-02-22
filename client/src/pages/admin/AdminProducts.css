@@ -1,0 +1,66 @@
+.product-table-container {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow-x: auto;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.product-table th {
+    background-color: #f8fafc;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.table-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.badge {
+    background-color: #e2e8f0;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #475569;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    padding: 6px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.action-btn.edit {
+    color: #3b82f6;
+    background-color: #eff6ff;
+}
+
+.action-btn.delete {
+    color: #ef4444;
+    background-color: #fef2f2;
+}
+
+.action-btn:hover {
+    filter: brightness(0.9);
+}

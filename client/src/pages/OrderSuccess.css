@@ -1,0 +1,140 @@
+/* Order Success Page Styles */
+.order-success-page {
+    background-color: #f8f9fa;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.success-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    /* Soft, premium shadow */
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.icon-wrapper {
+    margin-bottom: 1.5rem;
+    animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+@keyframes scaleIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.success-title {
+    color: #1a1a1a;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+.success-message {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.order-id-box {
+    background: #f1f3f5;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    color: #333;
+    display: inline-block;
+    width: 100%;
+}
+
+.order-id-label {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin-bottom: 0.25rem;
+}
+
+.order-id-value {
+    font-family: 'Monaco', monospace;
+    /* Monospaced for ID */
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.email-hint {
+    font-size: 0.95rem;
+    color: #999;
+    margin-bottom: 2.5rem;
+}
+
+.continue-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    /* Sleek black button */
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    /* Pill shape */
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.continue-btn:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.continue-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .success-card {
+        padding: 2rem;
+        box-shadow: none;
+        /* Flatter look on mobile if preferred, or keep shadow */
+        background: transparent;
+        /* Seamless on mobile */
+    }
+
+    .order-success-page {
+        background-color: white;
+        /* Clean white background for mobile */
+        align-items: flex-start;
+        padding-top: 3rem;
+    }
+
+    .success-title {
+        font-size: 1.75rem;
+    }
+}

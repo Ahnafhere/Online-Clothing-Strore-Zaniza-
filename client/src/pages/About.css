@@ -1,0 +1,70 @@
+.about-page {
+    margin-top: 120px;
+}
+
+.about-hero {
+    margin-bottom: 80px;
+}
+
+.about-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.about-hero .subtitle {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.about-section {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 100px;
+}
+
+.about-section.reverse {
+    flex-direction: row-reverse;
+}
+
+.about-section .text {
+    flex: 1;
+}
+
+.about-section .text h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+.about-section .text h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--accent);
+}
+
+.about-section .image {
+    flex: 1;
+}
+
+.about-section .image img {
+    width: 100%;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+
+    .about-section,
+    .about-section.reverse {
+        flex-direction: column;
+        gap: 30px;
+    }
+}

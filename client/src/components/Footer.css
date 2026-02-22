@@ -1,0 +1,131 @@
+.footer {
+    background-color: #111111;
+    /* Logo Black */
+    color: #ffffff;
+    padding: 4rem 0 2rem;
+    margin-top: auto;
+    /* Pushes footer to bottom if content is short */
+    border-top: 1px solid #1f1f1f;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section h3 {
+    color: #ff6b35;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Brand Section */
+.footer-logo-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.footer-logo-img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 2px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.footer-logo-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(220, 38, 38, 0.45);
+}
+
+.footer-tagline {
+    font-style: italic;
+    color: #aaa;
+    margin-bottom: 1rem;
+}
+
+.footer-description {
+    color: #ccc;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Links Section */
+.footer-section.links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section.links li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section.links a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section.links a:hover {
+    color: #ff6b35;
+    padding-left: 5px;
+}
+
+/* Contact/Social Section */
+.contact-item {
+    margin-bottom: 1rem;
+}
+
+.fb-link-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+    background-color: #1877f2;
+    /* Facebook Blue */
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.fb-link-group:hover {
+    background-color: #166fe5;
+    transform: translateY(-2px);
+}
+
+.fb-link-group span {
+    font-weight: 500;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .fb-link-group {
+        justify-content: center;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .footer-section.links a:hover {
+        padding-left: 0;
+    }
+}
