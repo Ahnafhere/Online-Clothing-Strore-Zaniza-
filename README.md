@@ -6,27 +6,27 @@ Zaniza is a premium, full-stack E-commerce solution designed for traditional and
 
 ---
 
-## ✨ Features
+##  Features
 
-### 🎨 Design & Experience
+###  Design & Experience
 *   **Aesthetic UI:** Modern, clean, and mobile-responsive interface focused on fashion branding.
 *   **Global Loading System:** Branded transitions and indicators for a polished feel during data fetching.
 *   **Dynamic Search:** Real-time product search and category filtering for intuitive navigation.
 *   **Optimized Performance:** Fast load times and smooth transitions.
 
-### 🔐 Authentication & Accounts
+###  Authentication & Accounts
 *   **Secure Auth:** User registration and login using JWT (JSON Web Tokens).
 *   **Profile Management:** Personalized dashboards for users to track orders and manage details.
 *   **Admin Power:** A comprehensive admin portal to manage inventory, update orders, and monitor business growth.
 
-### 🛒 Checkout & Payments
+###  Checkout & Payments
 *   **Streamlined Cart:** easy-to-use shopping bag with persistent state management.
 *   **Local Payment Integration:** Support for Bkash and Nagad with clear, user-friendly instructions.
 *   **Order Confirmation:** Automated system for order tracking and status updates.
 
 ---
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 | Layer | Technologies |
 | :--- | :--- |
@@ -37,7 +37,7 @@ Zaniza is a premium, full-stack E-commerce solution designed for traditional and
 
 ---
 
-## 📦 Getting Started
+##  Getting Started
 
 ### Prerequisites
 *   Node.js (v14 or higher)
