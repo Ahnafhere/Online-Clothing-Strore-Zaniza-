@@ -101,7 +101,7 @@ const Home = () => {
             </div>
 
             {/* About Teaser */}
-            <section className="about-teaser section-padding">
+            <section className="about-teaser section-padding mb-5">
                 <div className="container">
                     <div className="about-text text-center">
                         <h2>Zaniza Chittagong</h2>
