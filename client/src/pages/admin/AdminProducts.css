@@ -64,3 +64,19 @@
 .action-btn:hover {
     filter: brightness(0.9);
 }
+
+@media (max-width: 768px) {
+    .product-table th,
+    .product-table td {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+    .table-img {
+        width: 40px;
+        height: 40px;
+    }
+    .actions {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
