@@ -6,7 +6,7 @@ const About = () => {
             <div className="container">
                 <div className="about-hero text-center">
                     <h1>Our Story</h1>
-                    <p className="subtitle">Zaniza — in every thread.</p>
+                    <p className="subtitle">Authenticity in every thread.</p>
                 </div>
 
                 <div className="about-content">

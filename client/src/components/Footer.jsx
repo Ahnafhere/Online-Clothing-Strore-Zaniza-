@@ -20,7 +20,6 @@ const Footer = () => {
                     <Link to="/" className="footer-logo-link">
                         <img src={zanizaLogo} alt="Zaniza" className="footer-logo-img" />
                     </Link>
-                    <p className="footer-tagline">Wear Your Desire.</p>
                     <p className="footer-description">
                         Premium traditional and ethnic wear in Chittagong. Quality you can trust, style you'll love.
                     </p>
@@ -46,11 +45,6 @@ const Footer = () => {
                             <span>Visit us on Facebook</span>
                         </a>
                     </div>
-                    {/* Placeholder for other contacts if needed, keeping it clean for now as per request */}
-                    {/* <div className="contact-item">
-                        <Mail size={18} />
-                        <span>support@authenticbd.com</span>
-                    </div> */}
                 </div>
             </div>
 

@@ -78,8 +78,8 @@ const Home = () => {
                     <div className="hero-logo-wrap">
                         <img src={zanizaLogo} alt="Zaniza" className="hero-logo-img" />
                     </div>
-                    <h1 className="hero-title">Wear Your Desire</h1>
-                    <p className="hero-subtitle">Zaniza — Quality and Trust.</p>
+                    {/* Tagline updated: Wear Your Desire Dress WIth Authenticity, Quality and Trust */}
+                    <p className="hero-subtitle">Wear Your Desire Dress WIth Authenticity, Quality and Trust</p>
                     <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
                         <Link to="/shop" className="btn btn-primary mt-4">
                             Shop Collection

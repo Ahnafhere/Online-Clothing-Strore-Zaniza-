@@ -29,8 +29,8 @@ function App() {
     <CartProvider>
       <Router>
         <Helmet>
-          <title>Zaniza | Chittagong</title>
-          <meta name="description" content="Zaniza: Your destination for premium traditional and ethnic wear in Chittagong." />
+          <title>Wear Your Desire Dress WIth Authenticity, Quality and Trust | Premium Ethnic Wear</title>
+          <meta name="description" content="Wear Your Desire Dress WIth Authenticity, Quality and Trust. Your destination for premium traditional and ethnic wear in Chittagong." />
         </Helmet>
         <ScrollToTop />
         <div className="app">

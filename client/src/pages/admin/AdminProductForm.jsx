@@ -13,18 +13,20 @@ const AdminProductForm = () => {
         category: '',
         price: '',
         image: '',
+        images: [],
         description: '',
         countInStock: 0,
         isFeatured: false
     });
-    const [imagePreview, setImagePreview] = useState('');
+    const [imagePreviews, setImagePreviews] = useState([]);
+    const [isUploading, setIsUploading] = useState(false); // New uploading state for Cloudinary
 
     useEffect(() => {
         if (isEdit) {
             productAPI.getById(id)
                 .then(data => {
                     setFormData(data);
-                    setImagePreview(data.image);
+                    setImagePreviews(data.images || (data.image ? [data.image] : []));
                 })
                 .catch(err => console.error(err));
         }
@@ -38,32 +40,75 @@ const AdminProductForm = () => {
         }));
     };
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            // Check if file is an image
-            if (!file.type.startsWith('image/')) {
-                alert('Please select an image file');
-                return;
-            }
+    const handleImageChange = async (e) => {
+        const files = Array.from(e.target.files);
+        const currentImagesCount = formData.images.length;
+        const remainingSlots = 4 - currentImagesCount;
 
-            // Check file size (max 5MB)
-            if (file.size > 5 * 1024 * 1024) {
-                alert('Image size should be less than 5MB');
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const base64String = reader.result;
-                setFormData(prev => ({
-                    ...prev,
-                    image: base64String
-                }));
-                setImagePreview(base64String);
-            };
-            reader.readAsDataURL(file);
+        if (files.length > remainingSlots) {
+            alert(`You can only add ${remainingSlots} more image(s). Max 4 images allowed.`);
+            return;
         }
+
+        const validFiles = files.filter(file => {
+            if (!file.type.startsWith('image/')) {
+                alert(`${file.name} is not an image file`);
+                return false;
+            }
+            if (file.size > 5 * 1024 * 1024) {
+                alert(`${file.name} is too large. Max 5MB allowed.`);
+                return false;
+            }
+            return true;
+        });
+
+        if (validFiles.length === 0) return;
+
+        setIsUploading(true);
+
+        try {
+            const uploadedUrls = await Promise.all(validFiles.map(async (file) => {
+                const data = new FormData();
+                data.append("file", file);
+                data.append("upload_preset", "zaniza_uploads");
+                data.append("cloud_name", "dhcfdebho");
+
+                const res = await fetch("https://api.cloudinary.com/v1_1/dhcfdebho/image/upload", {
+                    method: "POST",
+                    body: data
+                });
+                const uploadedImage = await res.json();
+                return uploadedImage.secure_url; // This gives you the secure Cloudinary URL!
+            }));
+
+            setFormData(prev => {
+                const newImages = [...prev.images, ...uploadedUrls];
+                return {
+                    ...prev,
+                    images: newImages,
+                    image: newImages[0] || '' // Set first image as main image
+                };
+            });
+            setImagePreviews(prev => [...prev, ...uploadedUrls]);
+        } catch (error) {
+            console.error("Error uploading to Cloudinary:", error);
+            alert("Failed to upload images. Please try again.");
+        } finally {
+            setIsUploading(false);
+            e.target.value = ''; // Reset file input
+        }
+    };
+
+    const removeImage = (index) => {
+        setFormData(prev => {
+            const newImages = prev.images.filter((_, i) => i !== index);
+            return {
+                ...prev,
+                images: newImages,
+                image: newImages.length > 0 ? newImages[0] : ''
+            };
+        });
+        setImagePreviews(prev => prev.filter((_, i) => i !== index));
     };
 
     const handleSubmit = (e) => {
@@ -132,17 +177,33 @@ const AdminProductForm = () => {
                 </div>
 
                 <div className="form-group">
-                    <label>Product Image</label>
+                    <label>Product Images (Max 4)</label>
                     <input
                         type="file"
-                        name="image"
+                        name="images"
                         accept="image/*"
                         onChange={handleImageChange}
-                        required={!isEdit}
+                        multiple
+                        disabled={formData.images.length >= 4 || isUploading}
                     />
-                    {imagePreview && (
-                        <div className="image-preview">
-                            <img src={imagePreview} alt="Preview" />
+                    {isUploading && <p className="help-text" style={{color: 'blue'}}>Uploading images to Cloudinary... Please wait.</p>}
+                    <p className="help-text">First image will be the main cover image.</p>
+
+                    {imagePreviews.length > 0 && (
+                        <div className="images-preview-grid">
+                            {imagePreviews.map((preview, index) => (
+                                <div key={index} className="preview-item">
+                                    <img src={preview} alt={`Preview ${index + 1}`} />
+                                    <button
+                                        type="button"
+                                        className="remove-img-btn"
+                                        onClick={() => removeImage(index)}
+                                    >
+                                        &times;
+                                    </button>
+                                    {index === 0 && <span className="main-badge">Cover</span>}
+                                </div>
+                            ))}
                         </div>
                     )}
                 </div>
@@ -169,8 +230,8 @@ const AdminProductForm = () => {
                     </label>
                 </div>
 
-                <button type="submit" className="btn btn-primary">
-                    {isEdit ? 'Update Product' : 'Create Product'}
+                <button type="submit" className="btn btn-primary" disabled={isUploading}>
+                    {isUploading ? 'Uploading Images...' : (isEdit ? 'Update Product' : 'Create Product')}
                 </button>
             </form>
         </div>

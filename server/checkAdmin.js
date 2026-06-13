@@ -2,7 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const User = require('./models/User');
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/authentic-shop';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/zaniza-shop';
 
 async function checkAdmin() {
     try {

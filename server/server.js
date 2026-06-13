@@ -28,7 +28,7 @@ app.use(passport.session());
 
 // MongoDB Connection
 // MongoDB Connection Strategy for Serverless
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/authentic-shop';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/zaniza-shop';
 
 let cached = global.mongoose;
 
@@ -48,10 +48,11 @@ async function connectDB() {
 
         cached.promise = mongoose.connect(MONGODB_URI, opts).then(async (mongoose) => {
             console.log('✅ MongoDB Connected Successfully');
-            // Seed data only once connection is established
-            // Non-blocking seed to prevent cold-start timeouts
-            seedInitialData();
-            seedAdminUser();
+            // Seed data in background to avoid blocking cold starts
+            setTimeout(() => {
+                seedInitialData();
+                seedAdminUser();
+            }, 100);
             return mongoose;
         });
     }
@@ -115,6 +116,10 @@ async function seedInitialData() {
                     category: "Kameez",
                     price: 3500,
                     image: "https://images.unsplash.com/photo-1583391733958-37c265a6e279?auto=format&fit=crop&q=80&w=1000",
+                    images: [
+                        "https://images.unsplash.com/photo-1583391733958-37c265a6e279?auto=format&fit=crop&q=80&w=1000",
+                        "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&q=80&w=1000"
+                    ],
                     description: "Elegant emerald green kameez with intricate gold embroidery. Perfect for festive occasions.",
                     isFeatured: true
                 },
@@ -123,6 +128,10 @@ async function seedInitialData() {
                     category: "Saree",
                     price: 12000,
                     image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=1000",
+                    images: [
+                        "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=1000",
+                        "https://images.unsplash.com/photo-1596483738096-787be09c95d9?auto=format&fit=crop&q=80&w=1000"
+                    ],
                     description: "Traditional red Banarasi saree with wide golden borders. A timeless masterpiece.",
                     isFeatured: true
                 },
@@ -131,6 +140,7 @@ async function seedInitialData() {
                     category: "Fabric",
                     price: 1200,
                     image: "https://images.unsplash.com/photo-1596483738096-787be09c95d9?auto=format&fit=crop&q=80&w=1000",
+                    images: ["https://images.unsplash.com/photo-1596483738096-787be09c95d9?auto=format&fit=crop&q=80&w=1000"],
                     description: "Premium silk fabric with artistic batik prints. Suitable for custom tailoring.",
                     isFeatured: false
                 },
@@ -139,6 +149,7 @@ async function seedInitialData() {
                     category: "Kameez",
                     price: 4200,
                     image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&q=80&w=1000",
+                    images: ["https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&q=80&w=1000"],
                     description: "Flowy georgette suit in royal blue, adorned with stone work.",
                     isFeatured: true
                 },
@@ -147,6 +158,7 @@ async function seedInitialData() {
                     category: "Kameez",
                     price: 2500,
                     image: "https://images.unsplash.com/photo-1631233859262-0d625cf0264b?auto=format&fit=crop&q=80&w=800",
+                    images: ["https://images.unsplash.com/photo-1631233859262-0d625cf0264b?auto=format&fit=crop&q=80&w=800"],
                     description: "Comfortable pink cotton salwar kameez for daily wear.",
                     isFeatured: false
                 }
@@ -323,8 +335,6 @@ app.post('/api/orders', async (req, res) => {
         let userPhone = null;
 
         const token = req.headers.authorization?.split(' ')[1];
-        console.log('🔍 Order Debug: Authorization Header present:', !!token);
-        console.log('🔍 Order Debug: guestInfo present:', !!guestInfo);
 
         if (token) {
             try {
@@ -340,7 +350,6 @@ app.post('/api/orders', async (req, res) => {
                     userEmail = user.email;
                     userName = user.name;
                     userPhone = user.phone;
-                    console.log('🔍 Order Debug: Found Auth User Email:', userEmail);
                 }
             } catch (err) {
                 console.warn('🔍 Order Debug: Token verification failed:', err.message);
@@ -353,7 +362,6 @@ app.post('/api/orders', async (req, res) => {
             userEmail = guestInfo.email;
             userName = guestInfo.name;
             userPhone = guestInfo.phone;
-            console.log('🔍 Order Debug: Using Guest Info Email:', userEmail);
         }
 
         if (!userEmail) {
@@ -426,12 +434,11 @@ app.post('/api/orders', async (req, res) => {
 
                         <p style="margin-top: 20px; color: #666;">We will notify you once your order has been shipped. Thank you for shopping with us!</p>
                         <br>
-                        <p>Regards,<br><strong>Authentic | Chittagong Team</strong></p>
+                        <p>Regards,<br><strong>Zaniza | Chittagong Team</strong></p>
                     </div>
                 `;
 
                 // 1. Send to Customer
-                console.log(`📦 Sending confirmation to customer: ${userEmail}...`);
                 await sendEmail({
                     email: userEmail,
                     subject: emailSubjectCustomer,
@@ -443,7 +450,7 @@ app.post('/api/orders', async (req, res) => {
                 const emailMessageAdmin = `
                     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px;">
                         <h2 style="color: #d9534f;">New Order Received!</h2>
-                        <p>A new order has been placed on Authentic Shop.</p>
+                        <p>A new order has been placed on Zaniza Shop.</p>
                         
                         <h3>Customer Info</h3>
                         <p>
@@ -487,7 +494,6 @@ app.post('/api/orders', async (req, res) => {
                     </div>
                 `;
 
-                console.log(`📦 Sending notification to admin: ${adminEmail}...`);
                 await sendEmail({
                     email: adminEmail,
                     subject: emailSubjectAdmin,
@@ -608,10 +614,10 @@ app.get('/api/admin/stats', authenticate, isAdmin, async (req, res) => {
 
 // ==================== PRODUCT ROUTES ====================
 
-// GET all products
+// GET all products (Excludes gallery images for performance)
 app.get('/api/products', async (req, res) => {
     try {
-        const products = await Product.find();
+        const products = await Product.find().select('-images');
         res.json(products);
     } catch (error) {
         res.status(500).json({ message: error.message });

@@ -126,6 +126,7 @@ const Shop = () => {
                                         <img
                                             src={product.image}
                                             alt={product.name}
+                                            loading="lazy"
                                             onError={(e) => {
                                                 e.target.src = 'https://via.placeholder.com/400x400?text=Product+Image';
                                             }}

@@ -13,6 +13,7 @@ const ProductDetails = () => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(1);
+    const [selectedImage, setSelectedImage] = useState('');
     const { addToCart } = useCart();
 
     const handleAddToCart = () => {
@@ -25,6 +26,7 @@ const ProductDetails = () => {
         productAPI.getById(id)
             .then(data => {
                 setProduct(data);
+                setSelectedImage(data.image);
                 setLoading(false);
             })
             .catch(err => {
@@ -45,13 +47,28 @@ const ProductDetails = () => {
             <div className="container">
                 <div className="details-wrapper">
                     <div className="details-image">
-                        <img
-                            src={product.image}
-                            alt={product.name}
-                            onError={(e) => {
-                                e.target.src = 'https://via.placeholder.com/600x600?text=Product+Image';
-                            }}
-                        />
+                        <div className="main-image-container">
+                            <img
+                                src={selectedImage || product.image}
+                                alt={product.name}
+                                onError={(e) => {
+                                    e.target.src = 'https://via.placeholder.com/600x600?text=Product+Image';
+                                }}
+                            />
+                        </div>
+                        {product.images && product.images.length > 1 && (
+                            <div className="thumbnails-grid">
+                                {product.images.map((img, index) => (
+                                    <div
+                                        key={index}
+                                        className={`thumbnail ${selectedImage === img ? 'active' : ''}`}
+                                        onClick={() => setSelectedImage(img)}
+                                    >
+                                        <img src={img} alt={`${product.name} thumbnail ${index + 1}`} />
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                     <div className="details-info">
                         <span className="category-tag">{product.category}</span>

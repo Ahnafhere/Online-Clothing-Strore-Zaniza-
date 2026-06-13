@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Authentic Chittagong E-commerce Backend",
+  "description": "Zaniza Chittagong E-commerce Backend",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

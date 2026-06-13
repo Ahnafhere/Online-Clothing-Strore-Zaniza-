@@ -1,13 +1,8 @@
 const nodemailer = require('nodemailer');
 
 const sendEmail = async (options) => {
-    // 1. Diagnostic Logging
     const user = process.env.EMAIL_USER;
     const pass = process.env.EMAIL_PASS ? process.env.EMAIL_PASS.replace(/\s/g, '') : null;
-
-    console.log('🧪 DIAGNOSTIC: Email variables check:');
-    console.log(`- EMAIL_USER exists: ${!!user} (${user ? user.slice(0, 3) + '...' + user.slice(-10) : 'MISSING'})`);
-    console.log(`- EMAIL_PASS exists: ${!!pass} (Length: ${pass ? pass.length : 0})`);
 
     if (!user || !pass) {
         console.error('❌ CRITICAL: EMAIL_USER or EMAIL_PASS missing in environment!');
@@ -20,13 +15,11 @@ const sendEmail = async (options) => {
         auth: {
             user: user,
             pass: pass
-        },
-        debug: true, // Show full SMTP traffic in logs
-        logger: true // Log to console
+        }
     });
 
     const mailOptions = {
-        from: `"Authentic Shop" <${user}>`,
+        from: `"Zaniza" <${user}>`,
         to: options.email,
         subject: options.subject,
         html: options.message
