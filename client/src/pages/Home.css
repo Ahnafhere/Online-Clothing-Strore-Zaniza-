@@ -217,6 +217,7 @@
 .about-teaser {
     background-color: var(--white);
     overflow: hidden;
+    padding-bottom: 80px;
 }
 
 .about-text {
