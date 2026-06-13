@@ -96,7 +96,7 @@ const Home = () => {
             {/* New Arrivals Carousel */}
             <ProductCarousel products={featuredProducts} title="New Arrivals" />
 
-            <div className="text-center mb-5">
+            <div className="text-center mt-5 mb-5">
                 <Link to="/shop" className="btn btn-outline">View All Products</Link>
             </div>
 
