@@ -40,7 +40,7 @@ const Footer = () => {
                 <div className="footer-section contact">
                     <h3>Connect With Us</h3>
                     <div className="contact-item">
-                        <a href="https://www.facebook.com/authenticbychandny/" target="_blank" rel="noopener noreferrer" className="fb-link-group">
+                        <a href="https://www.facebook.com/share/1GrVZk5Wbx/" target="_blank" rel="noopener noreferrer" className="fb-link-group">
                             <Facebook size={24} />
                             <span>Visit us on Facebook</span>
                         </a>
