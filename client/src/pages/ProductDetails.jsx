@@ -107,8 +107,82 @@ const ProductDetails = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* ── Related Products ── */}
+                <RelatedProducts currentProductId={product._id} category={product.category} />
             </div>
         </div>
+    );
+};
+
+/* ── Related Products Sub-component ──────────────────────────────────── */
+const RelatedProducts = ({ currentProductId, category }) => {
+    const navigate = useNavigate();
+    const { addToCart } = useCart();
+    const [related, setRelated] = useState([]);
+
+    useEffect(() => {
+        productAPI.getAll()
+            .then(allProducts => {
+                const filtered = allProducts
+                    .filter(p => p.category === category && p._id !== currentProductId)
+                    .slice(0, 4);
+                setRelated(filtered);
+            })
+            .catch(err => console.error('Related products error:', err));
+    }, [currentProductId, category]);
+
+    if (related.length === 0) return null;
+
+    return (
+        <section className="related-products-section">
+            <div className="related-header">
+                <div className="related-header-line" />
+                <h2 className="related-title">You May Also Like</h2>
+                <div className="related-header-line" />
+            </div>
+            <p className="related-subtitle">More from the <strong>{category}</strong> collection</p>
+
+            <div className="related-grid">
+                {related.map(prod => (
+                    <div key={prod._id} className="related-card">
+                        <div
+                            className="related-card-image"
+                            onClick={() => navigate(`/product/${prod._id}`)}
+                        >
+                            <img
+                                src={prod.image}
+                                alt={prod.name}
+                                onError={(e) => e.target.src = 'https://via.placeholder.com/300x400?text=Product'}
+                            />
+                            {prod.countInStock === 0 && (
+                                <span className="related-out-badge">Out of Stock</span>
+                            )}
+                            <div className="related-card-overlay">
+                                <button className="related-quick-view">View Product</button>
+                            </div>
+                        </div>
+                        <div className="related-card-info">
+                            <h3 onClick={() => navigate(`/product/${prod._id}`)}>
+                                {prod.name}
+                            </h3>
+                            <p className="related-card-price">৳{prod.price}</p>
+                            <button
+                                className="related-add-btn"
+                                disabled={prod.countInStock === 0}
+                                onClick={() => {
+                                    addToCart({ ...prod, quantity: 1 });
+                                    navigate('/cart');
+                                }}
+                            >
+                                <ShoppingBag size={16} />
+                                {prod.countInStock > 0 ? 'Add to Cart' : 'Out of Stock'}
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
     );
 };
 

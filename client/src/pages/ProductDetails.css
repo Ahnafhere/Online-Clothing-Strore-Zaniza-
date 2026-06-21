@@ -108,4 +108,217 @@
         grid-template-columns: 1fr;
         gap: 30px;
     }
+
+    .related-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .related-title {
+        font-size: 1.4rem;
+    }
 }
+
+/* ── Related Products Section ─────────────────────────────────────── */
+.related-products-section {
+    margin-top: 80px;
+    padding-top: 60px;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Decorative heading with lines */
+.related-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 12px;
+}
+
+.related-header-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c41e2e, transparent);
+    border-radius: 2px;
+}
+
+.related-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #1a1a1a;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+}
+
+.related-subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 0.95rem;
+    margin-bottom: 40px;
+}
+
+.related-subtitle strong {
+    color: #c41e2e;
+}
+
+/* Grid */
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+/* Card */
+.related-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.related-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(196, 30, 46, 0.15);
+}
+
+/* Image wrapper with overlay */
+.related-card-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background: #f5f5f5;
+}
+
+.related-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.related-card:hover .related-card-image img {
+    transform: scale(1.07);
+}
+
+/* Overlay */
+.related-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.related-card:hover .related-card-overlay {
+    opacity: 1;
+}
+
+.related-quick-view {
+    background: #fff;
+    color: #c41e2e;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.related-quick-view:hover {
+    background: #c41e2e;
+    color: #fff;
+}
+
+/* Out of stock badge */
+.related-out-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Card info */
+.related-card-info {
+    padding: 16px;
+}
+
+.related-card-info h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: color 0.2s;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.related-card-info h3:hover {
+    color: #c41e2e;
+}
+
+.related-card-price {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #c41e2e;
+    margin-bottom: 14px;
+}
+
+.related-add-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: #c41e2e;
+    color: #fff;
+    border: none;
+    padding: 10px 0;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.2s ease;
+    letter-spacing: 0.3px;
+}
+
+.related-add-btn:hover:not(:disabled) {
+    background: #a51525;
+    transform: scale(1.02);
+}
+
+.related-add-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+@media (max-width: 480px) {
+    .related-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .related-card-info {
+        padding: 12px;
+    }
+
+    .related-add-btn {
+        font-size: 0.78rem;
+        padding: 8px 0;
+    }
+}
