@@ -1,218 +1,176 @@
 /* Hero Section */
 .hero {
     position: relative;
-    height: 90vh;
-    /* Taller hero */
+    min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #0d0005;
-    /* Fallback dark red-black */
     overflow: hidden;
     color: white;
+    padding-top: 80px; /* Offset for navbar */
+    padding-bottom: 60px;
 }
 
-/* Cinematic Background with Ken Burns Effect */
 .hero-background-layer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('/zaniza-logo.png');
-    background-size: contain;
+    background-image: linear-gradient(to right, rgba(13, 0, 5, 0.95) 0%, rgba(13, 0, 5, 0.8) 50%, rgba(13, 0, 5, 0.6) 100%), url('/zaniza-logo.png');
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    /* animation: kenBurns 20s infinite alternate linear; */
     z-index: 1;
 }
 
-@keyframes kenBurns {
-    0% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(1.15);
-    }
-}
-
-/* Floating Particles Container */
-.particles-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(255, 215, 0, 0.4);
-    /* Gold specks */
-    border-radius: 50%;
-    animation: floatUp linear infinite;
-}
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(100vh) scale(0);
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 0.8;
-    }
-
-    100% {
-        transform: translateY(-10vh) scale(1);
-        opacity: 0;
-    }
-}
-
-.hero-content {
+.hero-container {
     position: relative;
     z-index: 10;
-    text-align: center;
-    max-width: 800px;
-    padding: 20px;
-
-    /* Glassmorphism backing (optional, kept subtle) */
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(5px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-    padding: 60px 40px;
-    animation: fadeIn 1s ease-out;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
 }
 
-/* Hero Logo */
-.hero-logo-wrap {
+.hero-text-content {
     display: flex;
-    justify-content: center;
-    margin-bottom: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    animation: fadeInLeft 1s ease-out;
+}
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.hero-logo-wrap {
+    margin-bottom: 30px;
 }
 
 .hero-logo-img {
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
     object-fit: contain;
     border-radius: 12px;
-    box-shadow: 0 0 40px rgba(220, 38, 38, 0.5), 0 0 80px rgba(220, 38, 38, 0.2);
-    animation: heroPulse 3s ease-in-out infinite;
-    border: 3px solid rgba(220, 38, 38, 0.4);
-}
-
-@keyframes heroPulse {
-
-    0%,
-    100% {
-        box-shadow: 0 0 40px rgba(220, 38, 38, 0.5), 0 0 80px rgba(220, 38, 38, 0.2);
-        transform: scale(1);
-    }
-
-    50% {
-        box-shadow: 0 0 50px rgba(220, 38, 38, 0.6), 0 0 100px rgba(220, 38, 38, 0.25);
-        transform: scale(1.02);
-    }
-}
-
-
-
-.hero-3d-container {
-    position: absolute;
-    z-index: 5;
-    /* We place this behind text but in front of background? 
-       Or maybe as a featured element on the side. 
-       Let's keep it centered but floating behind text for depth. */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* Javascript overrides this, but this is base */
-    width: 80%;
-    max-width: 600px;
-    opacity: 0.8;
-    pointer-events: none;
-    mix-blend-mode: overlay;
-    /* Cool blending effect */
-}
-
-.hero-3d-obj {
-    width: 100%;
-    height: auto;
-    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
-    animation: breathe 6s ease-in-out infinite;
-}
-
-@keyframes breathe {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.05);
-    }
+    box-shadow: 0 0 30px rgba(196, 30, 46, 0.4);
+    border: 2px solid rgba(196, 30, 46, 0.5);
 }
 
 .hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: 5rem;
+    font-size: 3.5rem;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-    letter-spacing: 2px;
-
-    /* Gold Gradient Text */
-    background: linear-gradient(45deg, #fff, #ffd700, #fff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% auto;
-    animation: shine 4s linear infinite;
-}
-
-@keyframes shine {
-    to {
-        background-position: 200% center;
-    }
+    color: #fff;
+    line-height: 1.1;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
-    margin-bottom: 40px;
-    color: #e0e0e0;
+    font-size: 1.3rem;
+    margin-bottom: 35px;
+    color: #e2e8f0;
     font-weight: 300;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+    max-width: 90%;
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
-/* Featured Section (Carousel adjustments) */
-.featured {
-    background: white;
+.hero-featured-showcase {
+    display: flex;
+    justify-content: flex-end;
+    animation: fadeInRight 1s ease-out;
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.hero-product-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 420px;
     position: relative;
-    z-index: 5;
-    /* Sit above hero roughly */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, border-color 0.3s;
 }
 
-/* Responsive */
+.hero-product-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(196, 30, 46, 0.5);
+}
+
+.trending-badge {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: #c41e2e;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    z-index: 5;
+    box-shadow: 0 4px 15px rgba(196, 30, 46, 0.4);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.hero-product-img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.hero-product-info h3 {
+    font-size: 1.4rem;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.hero-product-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #c41e2e;
+    margin-bottom: 20px;
+}
+
+.hero-view-btn {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.hero-view-btn:hover {
+    background: #fff;
+    color: #0d0005;
+}
+
 /* About Teaser Section */
 .about-teaser {
     background-color: var(--white);
@@ -239,17 +197,42 @@
 }
 
 /* Responsive */
+@media (max-width: 992px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .hero-text-content {
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-subtitle {
+        max-width: 100%;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-featured-showcase {
+        justify-content: center;
+    }
+}
+
 @media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-logo-img {
+        width: 90px;
+        height: 90px;
+    }
+
     .about-text h2 {
         font-size: 2rem;
-    }
-
-    .hero-title {
-        font-size: 3rem;
-    }
-
-    .hero-content {
-        padding: 40px 20px;
-        margin: 0 15px;
     }
 }

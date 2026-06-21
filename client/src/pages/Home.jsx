@@ -56,38 +56,37 @@ const Home = () => {
         <div className="home">
             {/* Hero Section */}
             <section className="hero">
-                {/* Cinematic Background Layer */}
                 <div className="hero-background-layer"></div>
-
-                {/* Floating Particles - Removed to stop blinking effect */}
-                {/* <div className="particles-container">
-                    {[...Array(20)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="particle"
-                            style={{
-                                left: `${Math.random() * 100}%`,
-                                animationDelay: `${Math.random() * 5}s`,
-                                animationDuration: `${5 + Math.random() * 10}s`
-                            }}
-                        />
-                    ))}
-                </div> */}
-
-                <div className="hero-content text-center">
-                    <div className="hero-logo-wrap">
-                        <img src={zanizaLogo} alt="Zaniza" className="hero-logo-img" />
-                    </div>
-                    <p className="hero-subtitle">Wear Your Desire Dress With Authenticity, Quality and Trust</p>
-                    <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
-                        <Link to="/shop" className="btn btn-primary mt-4">
-                            Shop Collection
-                        </Link>
-                        {userRole === 'admin' && (
-                            <Link to="/admin/orders" className="btn btn-admin mt-4">
-                                <Settings size={20} />
-                                Admin Panel
+                <div className="container hero-container">
+                    <div className="hero-text-content">
+                        <div className="hero-logo-wrap">
+                            <img src={zanizaLogo} alt="Zaniza" className="hero-logo-img" />
+                        </div>
+                        <h1 className="hero-title">Discover Authenticity</h1>
+                        <p className="hero-subtitle">Wear Your Desire Dress With Authenticity, Quality and Trust</p>
+                        <div className="hero-buttons">
+                            <Link to="/shop" className="btn btn-primary">
+                                Shop Collection
                             </Link>
+                            {userRole === 'admin' && (
+                                <Link to="/admin/orders" className="btn btn-admin">
+                                    <Settings size={20} />
+                                    Admin Panel
+                                </Link>
+                            )}
+                        </div>
+                    </div>
+                    <div className="hero-featured-showcase">
+                        {featuredProducts.length > 0 && (
+                            <div className="hero-product-card">
+                                <span className="trending-badge">New Arrival</span>
+                                <img src={featuredProducts[0].image} alt={featuredProducts[0].name} className="hero-product-img" />
+                                <div className="hero-product-info">
+                                    <h3>{featuredProducts[0].name}</h3>
+                                    <p className="hero-product-price">৳{featuredProducts[0].price}</p>
+                                    <Link to={`/product/${featuredProducts[0]._id}`} className="hero-view-btn">View Details</Link>
+                                </div>
+                            </div>
                         )}
                     </div>
                 </div>
